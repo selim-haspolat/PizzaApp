@@ -1,4 +1,4 @@
-REDIRECT_URL_PATHNAME = 'user_login'
+REDIRECT_URL_PATHNAME = 'home'
 
 class FixView:
     template_name = 'user/user_form.html'
@@ -12,6 +12,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 
 
 class UserLoginView(FixView, LoginView):
+    extra_context = {'title': 'Login'} # Sayfa Başlık
     pass
 
 
@@ -29,7 +30,8 @@ from django.urls import reverse_lazy
 
 
 class UserCreateView(FixView, CreateView):
-    form_class = UserCreationForm
+    extra_context = {'title': 'Register'} # Sayfa Başlık
+    form_class = UserCreationForm # CustomUserCreationForm
     # success_url = '/user/login/'
     success_url = reverse_lazy(REDIRECT_URL_PATHNAME)
 
